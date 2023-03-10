@@ -1,3 +1,5 @@
+package blackjack;
+
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
@@ -26,9 +28,9 @@ public class Card {
     // 내부적으로 캐싱을 해주면 됨
     // 어떻게 해주지 ?? Key를 뭘로 두지??
     public static Card of(Suit suit, Denomination denomination) {
-        // Map<Suit, Map<Denomination, Card>> cache;
-        // Map<Integer, Card> cache; // 근데 캐시가 동일해지면 어카지?? 튜플같은것도 있음
-        //Map<String, Card> cache; //String 으로 해주겠다 (맨 위로 올림)
+        // Map<blackjack.Suit, Map<blackjack.Denomination, blackjack.Card>> cache;
+        // Map<Integer, blackjack.Card> cache; // 근데 캐시가 동일해지면 어카지?? 튜플같은것도 있음
+        //Map<String, blackjack.Card> cache; //String 으로 해주겠다 (맨 위로 올림)
 
         // 있을때 반환을 해주고 없을때 생성을 해주는 api
         return cache.computeIfAbsent(toKey(suit, denomination), ignore -> new Card(suit, denomination));
@@ -43,7 +45,7 @@ public class Card {
     // 캐싱을 했고 일종의 값 객체로 사용하고 있기 떄문에 얘네 둘을 오버라이딩 해주는 거임
     @Override
     public String toString() {
-        return "Card{" +
+        return "blackjack.Card{" +
             "suit=" + suit +
             ", denomination=" + denomination +
             '}';

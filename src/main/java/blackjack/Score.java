@@ -1,3 +1,5 @@
+package blackjack;
+
 import java.util.Objects;
 
 public class Score {
@@ -53,7 +55,7 @@ public class Score {
 
     @Override
     public String toString() {
-        return "Score{" +
+        return "blackjack.Score{" +
             "value=" + value +
             '}';
     }

@@ -1,3 +1,5 @@
+package blackjack;
+
 public enum Denomination {
 
     TWO(2),

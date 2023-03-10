@@ -1,7 +1,14 @@
+package blackjack;
+
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import blackjack.Card;
+import blackjack.Denomination;
+import blackjack.Hand;
+import blackjack.Suit;
 
 class HandTest {
 

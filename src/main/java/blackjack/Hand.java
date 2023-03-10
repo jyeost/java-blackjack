@@ -1,3 +1,5 @@
+package blackjack;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -54,7 +56,7 @@ public final class Hand {
 
     @Override
     public String toString() {
-        return "Hand{" +
+        return "blackjack.Hand{" +
             "cards=" + cards +
             '}';
     }
