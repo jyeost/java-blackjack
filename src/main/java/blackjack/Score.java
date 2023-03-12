@@ -20,14 +20,18 @@ public class Score {
 
     private final int value;
 
+    public Score(int value) {
+        this.value = value;
+    }
+
     // 이렇게 공개를 쉽게 할 수 있는 것은 이 객체가 불변이기 때문이다
     // 외부에서 조작될 걱정이 없음
-    public static Score min(){
+    public static Score min() {
         return min;
     }
 
-    public Score(int value) {
-        this.value = value;
+    public boolean isMax() {
+        return max.equals(this);
     }
 
     // 더하기
@@ -42,15 +46,15 @@ public class Score {
     }
 
     private boolean isLessThanOrEqual(Score other) {
-        return value <= other.value;
+        return this.isLessThan(other) || value == other.value;
+    }
+
+    private boolean isLessThan(Score other) {
+        return value < other.value;
     }
 
     public Score add(final Score other) {
         return new Score(value + other.value);
-    }
-
-    public int value() {
-        return value;
     }
 
     @Override
@@ -74,5 +78,9 @@ public class Score {
     @Override
     public int hashCode() {
         return Objects.hash(value);
+    }
+
+    public boolean isOverMax() {
+        return max.isLessThan(this);
     }
 }

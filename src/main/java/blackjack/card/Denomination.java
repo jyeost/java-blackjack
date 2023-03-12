@@ -1,4 +1,4 @@
-package blackjack;
+package blackjack.card;
 
 public enum Denomination {
 
@@ -26,7 +26,7 @@ public enum Denomination {
     }
 
     // 에이스인건 여기서 알수 있응꼐롱
-    public boolean isAce(){
+    public boolean isAce() {
         return ACE == this;
     }
 }

@@ -1,9 +1,11 @@
-package blackjack;
+package blackjack.card;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import blackjack.Score;
 
 public final class Hand {
     private final List<Card> cards;
@@ -17,7 +19,12 @@ public final class Hand {
         this.cards = new ArrayList<>(cards);
     }
 
-    public Hand add(final Card card){
+    // 생성자가 엄청 많아지는데 괜찮나???? 도 고민해봐
+    public Hand(final Card... cards) {
+        this(List.of(cards));
+    }
+
+    public Hand add(final Card card) {
         // 원시값 포장 -> 불변 객체
         // 일급 컬렉션 -> 불벽 객체 (힘들다)
         // cards.add(card); // 기존의 값이 변경이 됨
@@ -27,26 +34,18 @@ public final class Hand {
         return new Hand(newCards);
     }
 
-    // 생성자가 엄청 많아지는데 괜찮나???? 도 고민해봐
-    public Hand(final Card... cards) {
-        this(List.of(cards));
-    }
-
     // 스코어에 대한 기능들이 굉장히 많아지고 있는데 그러면 값개체에 대한 분리를 고민 해봐야 한다!!
-    public int calculateScore() {
-        boolean hasAce = hasAce();
-        Score score = score();
-
-        if (hasAce ) {
-            score = score.plusTenIfNotBurst();
+    public Score score() {
+        if (hasAce()) {
+            return sum().plusTenIfNotBurst();
         }
-        return score.value();
+        return sum();
     }
 
-    private Score score() {
+    private Score sum() {
         return cards.stream()
             .map(it -> it.score())
-            .reduce(Score.min(), (score, score2)-> score.add(score2));
+            .reduce(Score.min(), (score, score2) -> score.add(score2));
     }
 
     private boolean hasAce() {
@@ -56,7 +55,7 @@ public final class Hand {
 
     @Override
     public String toString() {
-        return "blackjack.Hand{" +
+        return "blackjack.card.Hand{" +
             "cards=" + cards +
             '}';
     }
@@ -74,5 +73,17 @@ public final class Hand {
     @Override
     public int hashCode() {
         return Objects.hash(cards);
+    }
+
+    public boolean isBust() {
+        return sum().isOverMax();
+    }
+
+    public List<Card> cards() {
+        return new ArrayList<>(cards);
+    }
+
+    public boolean isBlackJack() {
+        return score().isMax() && cards.size() == 2;
     }
 }
